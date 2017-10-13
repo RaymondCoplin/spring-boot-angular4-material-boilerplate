@@ -9,10 +9,11 @@ Front-end:
 
 - angular-cli boilerplate files
 - JWT authentication service
-- Login page
-- Roles Permissions
-- Navigation Menu
-- Material Design
+- +HttpClient
+- +Login page
+- +Roles Permissions
+- +Navigation Menu
+- +Material Design
 
 Back-end:
 
