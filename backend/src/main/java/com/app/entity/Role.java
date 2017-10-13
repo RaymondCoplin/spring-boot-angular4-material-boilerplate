@@ -2,26 +2,33 @@ package com.app.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
-@Entity(name = "roles")
+@Entity(name = "Roles")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Role implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
-
     private String label;
+    @ManyToMany
+    @JoinTable(
+            name="RolesPrivileges",
+            joinColumns = @JoinColumn(
+                    name = "roleId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "privilegeId", referencedColumnName = "id")
+    )
+    private Collection<Privilege> privileges;
 
-    public Role(String label) {
+    public Role(){}
+    public Role(Long id, String label) {
+        this.id = id;
         this.label = label;
     }
 

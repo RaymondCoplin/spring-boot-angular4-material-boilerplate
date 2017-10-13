@@ -1,0 +1,39 @@
+<div class="container">	  
+	<md-sidenav-container>
+		<md-toolbar>
+			<div style="width: 100%; display: flex; justify-content: space-between;">
+				<a md-icon-button (click)="sidenav.open()">
+					<md-icon>menu</md-icon>
+				</a>
+				<a style="float: right;">
+					{{ userInfo?.name }}
+				</a>
+			</div>
+		</md-toolbar>
+
+		<md-sidenav #sidenav>
+		<md-toolbar>
+			<img src="assets/images/Angular-boot.png" width="60" />
+			<h3>AngularSpringBoilerplate</h3>
+		</md-toolbar>
+
+		<md-nav-list>
+			<h3 md-subheader>Actions 1</h3>
+			<a md-list-item [routerLink]="['/customer']" (click)="sidenav.close()">Customers</a>
+			<a md-list-item href="javascript:void(0)" (click)="sidenav.close()">Link 2</a>
+			<md-divider></md-divider>
+			<h3 md-subheader>Actions 2</h3>
+			<a md-list-item (click)="logout()">Logout</a>
+		</md-nav-list>
+		</md-sidenav>
+		
+		<div>
+			<md-toolbar>
+				<md-icon>{{templateValues[0]}}</md-icon>
+				<h3 style="margin-left: 10px;">{{templateValues[1]}}</h3>
+			</md-toolbar>
+			<router-outlet></router-outlet>
+		</div>
+
+	</md-sidenav-container>
+</div>

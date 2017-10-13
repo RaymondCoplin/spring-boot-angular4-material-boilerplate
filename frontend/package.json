@@ -18,22 +18,29 @@
     "copy": "cp -r dist/* ../backend/src/main/resources/public"
   },
   "dependencies": {
-    "@angular/common": ">=4.2.2 <5.0.0",
-    "@angular/compiler": ">=4.2.2 <5.0.0",
-    "@angular/core": ">=4.2.2 <5.0.0",
-    "@angular/forms": ">=4.2.2 <5.0.0",
-    "@angular/http": ">=4.2.2 <5.0.0",
-    "@angular/platform-browser": ">=4.2.2 <5.0.0",
-    "@angular/platform-browser-dynamic": ">=4.2.2 <5.0.0",
-    "@angular/router": ">=4.2.2 <5.0.0",
+    "@angular/animations": "^4.4.4",
+    "@angular/cdk": "^2.0.0-beta.11",
+    "@angular/cli": "^1.4.4",
+    "@angular/common": "^4.4.4",
+    "@angular/compiler": "^4.4.4",
+    "@angular/compiler-cli": "^4.4.4",
+    "@angular/core": "^4.4.4",
+    "@angular/flex-layout": "^2.0.0-beta.9",
+    "@angular/forms": "4.4.4",
+    "@angular/http": "4.4.4",
+    "@angular/material": "^2.0.0-beta.11",
+    "@angular/platform-browser": "4.4.4",
+    "@angular/platform-browser-dynamic": "4.4.4",
+    "@angular/router": "4.4.4",
     "core-js": "^2.4.1",
+    "hammerjs": "^2.0.8",
+    "ngx-permissions": "^2.1.0",
+    "ngx-webstorage": "^1.8.0",
     "rxjs": "^5.1.0",
     "sw-precache": "^5.2.0",
-    "zone.js": "^0.7.6"
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^1.2.1",
-    "@angular/compiler-cli": ">=4.2.2 <5.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -49,6 +56,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.1.0"
+    "typescript": "^2.3.4"
   }
 }

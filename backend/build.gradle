@@ -14,6 +14,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: "jacoco"
+apply plugin: 'nebula.provided-base'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -46,6 +47,11 @@ jar {
 
 jacoco {
   toolVersion = "0.7.6.201602180812"
+}
+
+lombok {
+  version = '1.16.18'
+  sha256 = ""
 }
 
 jacocoTestReport {

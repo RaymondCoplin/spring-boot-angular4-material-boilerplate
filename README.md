@@ -1,11 +1,7 @@
-# Spring Boot + Angular 4 Boilerplate
+# Spring Boot + Angular 4 + Material
 
-![spring-boot-angular4-boilerplate](https://raw.githubusercontent.com/Saka7/spring-boot-angular4-boilerplate/master/frontend/src/assets/images/favicon.png)
-
-[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
-[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
-
-Quick start for Spring Boot + Angular 4 projects with JWT auth
+Author: @Saka7
+Contributor: @raymondcoplin
 
 ## Includes:
 
@@ -13,6 +9,10 @@ Front-end:
 
 - angular-cli boilerplate files
 - JWT authentication service
+- Login page
+- Roles Permissions
+- Navigation Menu
+- Material Design
 
 Back-end:
 
@@ -69,11 +69,13 @@ Also you need to configure JWT secret in file listed above.
 - [postgresql 9.5](https://www.postgresql.org/)
 - [h2 1.4](http://www.h2database.com/html/main.html)
 - [angular-cli 1.1.1](https://cli.angular.io/)
-- [angular 4.2.2](https://angular.io/)
+- [angular 4.4.4](https://angular.io/)
 - [rxjs 5](http://reactivex.io/rxjs/)
 - [jasmine 2.5](https://jasmine.github.io/)
 - [karma 1.0](https://karma-runner.github.io/1.0/index.html)
 - [protractor 4](http://www.protractortest.org/#/)
+- [angular material2](https://material.angular.io/)
+- [ngx-permissions 2.1.0](https://github.com/AlexKhymenko/ngx-permissions)
 
 ## License
 spring-boot-angular4-boilerplate is released under the [MIT License](https://opensource.org/licenses/MIT).

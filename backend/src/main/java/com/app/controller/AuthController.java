@@ -1,14 +1,12 @@
 package com.app.controller;
 
+import com.app.entity.Privilege;
 import com.app.entity.Role;
 import com.app.entity.User;
 import com.app.exception.InvalidPasswordException;
 import com.app.exception.UserAlreadyExistsException;
 import com.app.exception.UserNotFoundException;
-import com.app.security.auth.JwtAuthenticationRequest;
-import com.app.security.auth.JwtAuthenticationResponse;
-import com.app.security.auth.JwtUtil;
-import com.app.security.auth.JwtUser;
+import com.app.security.auth.*;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +26,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * AuthController provides signup, signin and token refresh methods
@@ -112,7 +113,15 @@ public class AuthController extends BaseController {
             throw new UserAlreadyExistsException();
         }
 
-        Role role  = new Role(1L, "USER");
+        List<Privilege> privileges = Arrays.asList(
+                new Privilege("readProduct"),
+                new Privilege("createCustomer"),
+                new Privilege("readCustomer"),
+                new Privilege("updateCustomer"),
+                new Privilege("deleteCustomer")
+        );
+
+        Role role  = new Role(1L, "ROLE_ADMIN");
         userService.save(new User(0L, name, email, password, role));
         JwtUser userDetails;
 
@@ -169,7 +178,7 @@ public class AuthController extends BaseController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = jwtUtil.generateToken(userDetails);
+        String token = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 

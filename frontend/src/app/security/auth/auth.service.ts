@@ -1,3 +1,5 @@
+import {User} from '../../models/user.model';
+import { TemplateService } from '../../components/template/template.service';
 import { Injectable } from '@angular/core';
 
 import {
@@ -10,8 +12,11 @@ import {
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { environment } from '../../../environments/environment';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 /**
 * AuthService uses JSON-Web-Token authorization strategy.
@@ -28,7 +33,11 @@ export class AuthService {
   public static readonly SIGNIN_URL = environment.apiUrl + "/api/auth/signin";
   public static readonly REFRESH_TOKEN_URL = environment.apiUrl + "/api/auth/token/refresh";
   
-  constructor(private http: Http) {
+  constructor(
+    private http: HttpClient,
+    private templateService: TemplateService,
+    private ngxPermissionsService: NgxPermissionsService
+  ) {
     this.refreshUserData();
   }
 
@@ -48,7 +57,7 @@ export class AuthService {
   * @param email
   * @param password
   */
-  public signUp(username: string, email: string, password: string): Observable<{}> {
+  public signUp(username: string, email: string, password: string): Observable<void | {}> {
 
     const requestParam = {
       email: email,
@@ -70,7 +79,7 @@ export class AuthService {
   * @param username
   * @param password
   */
-  public signIn(username: string, password: string): Observable<{}> {
+  public signIn(username: string, password: string): Observable<void | {}> {
 
     const requestParam = {
       username: username,
@@ -80,27 +89,71 @@ export class AuthService {
     return this.http.post(AuthService.SIGNIN_URL, requestParam, this.generateOptions())
       .map((res: Response) => {
         this.saveToken(res);
-        this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
-      }).catch(err => {
-        throw Error(err.json().message);
+        let user = this.getUser();
+        this.saveUserDetails(user);
+        this.templateService.setUser(user);
+        const permissions = this.getRole();
+        if(permissions !== null) {
+          this.ngxPermissionsService.loadPermissions(permissions);
+        }
+        return user;
       });
   }
 
   /**
   * Removes token and user details from sessionStorage and service's variables
   */
-  public logout(): void {
+  public logout(): Observable<Boolean> {
     sessionStorage.removeItem('user');
+    this.ngxPermissionsService.flushPermissions();
     this.token = null;
     this.username = null;
     this.userId = null;
+    this.templateService.setUser(null);
+    return Observable.of(true);
+  }
+
+  //Get User Info from Storage
+  public getUser(user?: User): User{
+    let userInfo: User;
+
+    if(!user){
+      let userFromSession = JSON.parse(sessionStorage.getItem('user'));
+      if(userFromSession){
+        userInfo = new User(userFromSession.id, userFromSession.sub, userFromSession.token, userFromSession.role);
+      }
+    } else {
+      userInfo = new User(user.id, user.name, user.token, user.role);
+    }
+
+    if(!userInfo) {
+      return null;
+    }
+
+    return userInfo;
+  }
+
+  /**
+  * get roles
+  */
+  public getRole(user?: any): string[] {
+    let roles: any = null;
+    if(user !== undefined){
+      roles = user.role.map(x => x.authority);
+    } else {
+      var user = JSON.parse(sessionStorage.getItem('user'));
+      if(user !== null) {
+        roles = user.role.map(x => x.authority);
+      }
+    }
+    return roles;
   }
 
   /**
   * Refreshes token for the user with given token
   * @param token - which should be refreshed
   */
-  public refreshToken(token: string): Observable<{}> {
+  public refreshToken(token: string): Observable<void | {}> {
     const requestParam = { token: this.token };
 
     return this.http.post(AuthService.REFRESH_TOKEN_URL, requestParam, this.generateOptions())
@@ -142,7 +195,7 @@ export class AuthService {
 
   // Saves user details with token into sessionStorage as user item
   private saveToken(res: Response): void {
-    const response = res.json() && res.json().token;
+    const response = res && res['token'];
     if (response) {
       const token = response;
       let claims = this.getTokenClaims(token);
@@ -154,9 +207,9 @@ export class AuthService {
   }
 
   // Saves user details into service properties
-  private saveUserDetails(user): void {
+  private saveUserDetails(user: User): void {
     this.token = user.token || '';
-    this.username = user.sub || '';
+    this.username = user.name || '';
     this.userId = user.id || 0;
   }
 
@@ -168,12 +221,12 @@ export class AuthService {
   }
 
   // Generates Headers
-  private generateOptions(): RequestOptions {
-    let headers = new Headers();
+  private generateOptions(): {} {
+    let headers = new HttpHeaders();
     headers.append("Content-Type", 'application/json');
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type");
-    return new RequestOptions({ headers: headers });
+    return {headers: headers };
   }
 
 }

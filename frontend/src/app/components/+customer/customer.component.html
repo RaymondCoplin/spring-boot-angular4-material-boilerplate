@@ -1,0 +1,11 @@
+<br /><br />
+<button md-button routerLink="search" *ngxPermissionsOnly="['ROLE_ADMIN', 'ROLE_USER']">Search</button>
+<button md-button routerLink="create" *ngxPermissionsOnly="['ROLE_ADMIN']">Create</button>
+<button md-button routerLink="edit" *ngxPermissionsOnly="['ROLE_ADMIN']">Edit</button>
+<br /><br />
+
+<div *ngxPermissionsOnly="['ADMIN']">
+	<b>This is shown if you are an administrator.</b>
+</div>
+
+<router-outlet></router-outlet>
