@@ -1,19 +1,19 @@
 # Spring Boot + Angular 4 + Material
 
-Author: @Saka7
-Contributor: @raymondcoplin
-
 ## Includes:
 
 Front-end:
 
 - angular-cli boilerplate files
 - JWT authentication service
-- +HttpClient
-- +Login page
-- +Roles Permissions
-- +Navigation Menu
-- +Material Design
+
+**What's news**
+- HttpClient
+- Login page
+- Roles Permissions
+- Navigation Menu
+- Material Design
+
 
 Back-end:
 
@@ -64,9 +64,9 @@ Also you need to configure JWT secret in file listed above.
 - [spring-data-jpa 1.11.0](http://projects.spring.io/spring-data-jpa/)
 - [spring-security 4.2.1](https://projects.spring.io/spring-security/)
 - [jjwt 0.7.0](https://github.com/jwtk/jjwt)
-- [lombok 1.16.12](https://projectlombok.org/)
+- [lombok 1.16.18](https://projectlombok.org/)
 - [junit 4.11](http://junit.org/junit4/)
-- [gradle 3.3](https://gradle.org/)
+- [gradle 4.1](https://gradle.org/)
 - [postgresql 9.5](https://www.postgresql.org/)
 - [h2 1.4](http://www.h2database.com/html/main.html)
 - [angular-cli 1.1.1](https://cli.angular.io/)
@@ -77,6 +77,11 @@ Also you need to configure JWT secret in file listed above.
 - [protractor 4](http://www.protractortest.org/#/)
 - [angular material2](https://material.angular.io/)
 - [ngx-permissions 2.1.0](https://github.com/AlexKhymenko/ngx-permissions)
+
+##Author
+- Author: [@saka7](https://github.com/saka7)
+- Contributor: [@raymondcoplin](https://github.com/RaymondCoplin)
+
 
 ## License
 spring-boot-angular4-boilerplate is released under the [MIT License](https://opensource.org/licenses/MIT).
