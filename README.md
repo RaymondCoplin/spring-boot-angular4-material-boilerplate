@@ -78,7 +78,7 @@ Also you need to configure JWT secret in file listed above.
 - [angular material2](https://material.angular.io/)
 - [ngx-permissions 2.1.0](https://github.com/AlexKhymenko/ngx-permissions)
 
-##Author
+## Author
 - Author: [@saka7](https://github.com/saka7)
 - Contributor: [@raymondcoplin](https://github.com/RaymondCoplin)
 
