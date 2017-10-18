@@ -9,10 +9,11 @@ Front-end:
 
 - angular-cli boilerplate files
 - JWT authentication service
-- Login page
-- Roles Permissions
-- Navigation Menu
-- Material Design
+- +HttpClient
+- +Login page
+- +Roles Permissions
+- +Navigation Menu
+- +Material Design
 
 Back-end:
 
@@ -42,7 +43,7 @@ Also you need to configure JWT secret in file listed above.
 > By default server will be running on port `8080`.
 
 
-## Depelopment
+## Development
 
 - `npm start --prefix frontend` to start front-end server for development.
 - `npm run start:prod --prefix frontend` to start front-end server with service-workers.
