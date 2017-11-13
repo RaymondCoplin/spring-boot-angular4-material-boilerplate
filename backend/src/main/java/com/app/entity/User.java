@@ -19,17 +19,14 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    @Getter
     private Long id;
 
     @NotNull
     @Column(nullable = false, unique = true)
-    @Getter
     private String name;
 
     @Email
     @Column(nullable = false, unique = true)
-    @Getter
     private String email;
 
     @NotNull
@@ -37,7 +34,6 @@ public class User implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "roleId")
-    @Getter
     private Role role;
 
     public User(String name, String email, String password, Role role) {
@@ -51,8 +47,6 @@ public class User implements Serializable {
         this(name, email, password, role);
         this.setId(id);
     }
-
-
 
     @JsonIgnore
     public String getPassword() {
