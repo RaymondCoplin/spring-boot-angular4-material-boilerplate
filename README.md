@@ -17,8 +17,8 @@ Front-end:
 
 Back-end:
 
-- gradle build file
-- boilerplate files
+- Gradle build file
+- Boilerplate files
 - JWT authentication
 
 ## Setup
